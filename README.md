@@ -1,1 +1,1 @@
-# apeCoinMintNft
+# Use Ape Coin Mint NFT
