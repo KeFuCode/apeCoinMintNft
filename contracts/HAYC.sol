@@ -3,7 +3,6 @@
 
 pragma solidity ^0.8.0;
 
-
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 import "@openzeppelin/contracts/interfaces/IERC20.sol";
@@ -65,8 +64,7 @@ contract HAYC is ERC721, IERC2981, Ownable, ReentrancyGuard {
 
     modifier canMintHAYC(uint256 numberOfTokens) {
         require(
-            tokenCounter.current() + numberOfTokens <=
-                maxHAYC - maxGiftedHAYC,
+            tokenCounter.current() + numberOfTokens <= maxHAYC - maxGiftedHAYC,
             "Not enough HAYC remaining to mint"
         );
         _;
@@ -129,7 +127,6 @@ contract HAYC is ERC721, IERC2981, Ownable, ReentrancyGuard {
             _safeMint(msg.sender, nextTokenId());
         }
     }
-
 
     function mintCommunitySale(
         uint8 numberOfTokens,
@@ -212,11 +209,9 @@ contract HAYC is ERC721, IERC2981, Ownable, ReentrancyGuard {
         isCommunitySaleActive = _isCommunitySaleActive;
     }
 
-
     function setCommunityListMerkleRoot(bytes32 merkleRoot) external onlyOwner {
         communitySaleMerkleRoot = merkleRoot;
     }
-
 
     function setClaimListMerkleRoot(bytes32 merkleRoot) external onlyOwner {
         claimListMerkleRoot = merkleRoot;
@@ -234,7 +229,6 @@ contract HAYC is ERC721, IERC2981, Ownable, ReentrancyGuard {
             _safeMint(msg.sender, nextTokenId());
         }
     }
-
 
     function giftHAYC(address[] calldata addresses)
         external
