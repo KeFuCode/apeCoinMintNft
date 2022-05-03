@@ -23,26 +23,22 @@ contract ApeMintNFT is Ownable, ReentrancyGuard {
     // public mint 
     function mintPublic(uint numHAYC) public payable {
         require(numHAYC > 0, "Must mint at least one");
-        require(IHAYC(nftContract).isPublicSaleActive() == true, "Public sale is not open");
         IERC20(tokenContract).safeTransferFrom(msg.sender, address(this), mintPrice * numHAYC);
         uint tokenId = IHAYC(nftContract).getLastTokenId();
-        uint ethAmount = numHAYC * 0.1;
-        IHAYC(nftContract).mint{ value: ethAmount ether }(numHAYC);
+        IHAYC(nftContract).mint{ value: numHAYC * 0.1 ether }(numHAYC);
         for (uint i=1; i <= numHAYC; i++) {
-            IHAYC(nftContract).transferFrom(address(this), msg.sender, tokenID+i);
+            IHAYC(nftContract).transferFrom(address(this), msg.sender, tokenId+i);
         }
     }
 
     // community mint
-    function mintCommunity(uint numHAYC, bytes32[] calldata merkleProof)  public payable {
+    function mintCommunity(uint8 numHAYC, bytes32[] calldata merkleProof)  public payable {
         require(numHAYC > 0, "Must mint at least one");
-        require(IHAYC(nftContract).isPublicSaleActive() == true, "Public sale is not open");
         IERC20(tokenContract).safeTransferFrom(msg.sender, address(this), mintPrice * numHAYC);
         uint tokenId = IHAYC(nftContract).getLastTokenId();
-        uint ethAmount = numHAYC * 0.07;
-        IHAYC(nftContract).mintCommunitySale{ value: ethAmount ether }(numHAYC, merkleProof);
+        IHAYC(nftContract).mintCommunitySale{ value: numHAYC * 0.07 ether }(numHAYC, merkleProof);
         for (uint i=1; i <= numHAYC; i++) {
-            IHAYC(nftContract).transferFrom(address(this), msg.sender, tokenID+i);
+            IHAYC(nftContract).transferFrom(address(this), msg.sender, tokenId+i);
         }
     }
 

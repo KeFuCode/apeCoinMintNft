@@ -9,5 +9,5 @@ interface IHAYC {
     // community mint
     function mintCommunitySale(uint8 numberOfTokens, bytes32[] calldata merkleProof) external payable;
     // transferFrom
-    function transferFrom(address from, address to, uint256 tokenId) public;
+    function transferFrom(address from, address to, uint256 tokenId) external;
 }
