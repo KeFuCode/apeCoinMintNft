@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
-import "./IHAYC.sol";
+import "./interfaces/IHAYC.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
@@ -47,7 +47,7 @@ contract ApeMintNFT is IERC721Receiver, Ownable, ReentrancyGuard {
             mintPrice * numHAYC
         );
         uint tokenId = IHAYC(nftContract).getLastTokenId();
-        IHAYC(nftContract).mint{value: numHAYC * 0.001 ether}(numHAYC);
+        IHAYC(nftContract).mint{value: numHAYC * 0.1 ether}(numHAYC);
         for (uint i = 1; i <= numHAYC; i++) {
             IHAYC(nftContract).transferFrom(
                 address(this),
@@ -68,7 +68,7 @@ contract ApeMintNFT is IERC721Receiver, Ownable, ReentrancyGuard {
             mintPrice * numHAYC
         );
         uint tokenId = IHAYC(nftContract).getLastTokenId();
-        IHAYC(nftContract).mintCommunitySale{value: numHAYC * 0.0007 ether}(
+        IHAYC(nftContract).mintCommunitySale{value: numHAYC * 0.07 ether}(
             numHAYC,
             merkleProof
         );
